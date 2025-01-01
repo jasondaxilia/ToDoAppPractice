@@ -9,7 +9,9 @@ class TasksController extends Controller
 {
     public function index()
     {
-        $tasks = Task::all();
+        $tasks = Task::orderBy('completed_at')
+            ->orderByDesc('id')
+            ->paginate(5);
 
         // return dd($tasks);
         return view('index', compact('tasks'));
@@ -26,6 +28,16 @@ class TasksController extends Controller
             'description' => request('description'),
         ]);
 
-        return dd($task);
+        // return dd($task);
+        return redirect('/');
+    }
+
+    public function update($id)
+    {
+        $task = Task::where('id', $id)->first();
+
+        $task->completed_at = now();
+        $task->save();
+        return redirect('/');
     }
 }

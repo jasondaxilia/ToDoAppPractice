@@ -7,7 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 class Task extends Model
 {
     protected $fillable = [
-        'description'
+        'description',
+        'completed_at'
     ];
     public $table = 'tasks';
+
+    public function checkIfCompleted()
+    {
+        return $this->completed_at !== null;
+    }
 }
