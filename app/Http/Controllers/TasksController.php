@@ -11,7 +11,7 @@ class TasksController extends Controller
     {
         $tasks = Task::orderBy('completed_at')
             ->orderByDesc('id')
-            ->paginate(5);
+            ->paginate(8);
 
         // return dd($tasks);
         return view('index', compact('tasks'));
@@ -24,7 +24,11 @@ class TasksController extends Controller
 
     public function store()
     {
-        $task = Task::create([
+        request()->validate([
+            'description' => 'required',
+        ]);
+
+        Task::create([
             'description' => request('description'),
         ]);
 
@@ -38,6 +42,13 @@ class TasksController extends Controller
 
         $task->completed_at = now();
         $task->save();
+        return redirect('/');
+    }
+
+    public function delete($id)
+    {
+        $task = Task::where('id', $id)->first();
+        $task->delete();
         return redirect('/');
     }
 }

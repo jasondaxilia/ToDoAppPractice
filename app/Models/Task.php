@@ -3,9 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Task extends Model
 {
+    use SoftDeletes;
     protected $fillable = [
         'description',
         'completed_at'
@@ -16,4 +18,10 @@ class Task extends Model
     {
         return $this->completed_at !== null;
     }
+
+    public function checkIfDeleted()
+    {
+        return $this->deleted_at !== null;
+    }
+
 }

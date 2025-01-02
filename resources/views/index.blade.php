@@ -10,24 +10,26 @@
                         {{ $task->description }}
                     </div>
                     <div class="text-center" style="width: 10%">
-                        <form method="POST" action="/tasks/{{ $task->id }}">
-                            @method('PATCH')
-                            @csrf
-                            @if ($task->checkIfCompleted())
-                                <span class="btn btn-success" style="cursor: default; width: 110px">Completed</span>
-                            @else
-                                <button class="btn btn-secondary" input="submit" style="width: 110px">Complete</button>
-                            @endif
-                        </form>
+                        @if (!$task->checkIfCompleted())
+                            <form method="POST" action="/tasks/{{ $task->id }}">
+                                @method('PATCH')
+                                @csrf
+                                <button class="btn btn-success" type="submit" style="width: 110px">Complete</button>
+                            </form>
+                        @else
+                            <form method="POST" action="/tasks/{{ $task->id }}">
+                                @method('DELETE')
+                                @csrf
+                                <button class="btn btn-danger" type="submit" style="width: 110px">Delete</button>
+                            </form>
+                        @endif
                     </div>
                 </div>
             </div>
         @endforeach
-        <div class="d-flex gap-3">
-            <a href="/tasks/create" class="btn btn-primary" style="width: 70%">New Task</a>
-            <div class="d-flex justify-content-center">
-                {{ $tasks->links() }}
-            </div>
+        <div class="d-flex mb-2">
+            <a href="/tasks/create" class="btn btn-primary w-100">New Task</a>
         </div>
+        {{ $tasks->links() }}
     </div>
 @endsection

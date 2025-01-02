@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <title>ToDoApp</title>
 </head>
 
@@ -21,6 +22,7 @@
                 <div class="navbar-nav">
                     <a class="nav-link" href="/">All Tasks</a>
                     <a class="nav-link" href="/tasks/create">New Task</a>
+                    <a class="nav-link" href="/tasks/deleted">Deleted Task</a>
                 </div>
             </div>
         </div>

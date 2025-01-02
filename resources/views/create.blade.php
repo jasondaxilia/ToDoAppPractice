@@ -3,6 +3,16 @@
 @section('content')
     <div class="container">
         <div class="h1">New Tasks</div>
+
+        @if ($errors->any())
+            <div class="alert alert-danger align-items-center">
+                @foreach ($errors->all() as $error)
+                    <ul class="m-0">{{ $error }}</ul>
+                @endforeach
+
+            </div>
+        @endif
+
         <form method="POST" action="/tasks">
             @csrf
             <div class="form-group">
